@@ -33,6 +33,22 @@ class CarInsurance {
         } else {
           p.price += 1;
         }
+      case 'Mega Coverage':
+      break;
+      case 'Special Full Coverage':
+        if (p.sellIn < 0) {
+          p.price = 0;
+        }
+        else {
+          if (p.sellIn < 10) {
+            p.price += 2;
+          }
+          else if(p.sellIn < 5) {
+            p.price += 3;
+          } else {
+            p.price += 1;
+          }
+        }
       default:
         if (p.sellIn < 0) {
           if (p.price >= 2) {
