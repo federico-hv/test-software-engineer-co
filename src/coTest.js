@@ -49,6 +49,20 @@ class CarInsurance {
             p.price += 1;
           }
         }
+      case 'Super Sale':
+        if (p.sellIn < 0) {
+          if (p.price >= 4) {
+            p.price -= 4;
+          } else {
+            p.price = 0;
+          }
+        }else{
+          if (p.price >= 2) {
+            p.price -= 2;
+          } else {
+            p.price = 0;
+          }
+        }
       default:
         if (p.sellIn < 0) {
           if (p.price >= 2) {
