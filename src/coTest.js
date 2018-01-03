@@ -23,18 +23,22 @@ class CarInsurance {
     return p;
   }
 
-  
   updateProduct(p) {
-    p.sellIn -=1;
-    switch(p) {
+    
+    if (p.name !== 'Mega Coverage') {
+      p.sellIn -=1;
+    }
+
+    switch(p.name) {
       case 'Full Coverage':
         if (p.sellIn < 0) {
           p.price += 2;
         } else {
           p.price += 1;
         }
-      case 'Mega Coverage':
       break;
+      case 'Mega Coverage':
+        return p;
       case 'Special Full Coverage':
         if (p.sellIn < 0) {
           p.price = 0;
@@ -49,46 +53,33 @@ class CarInsurance {
             p.price += 1;
           }
         }
+      break;
       case 'Super Sale':
         if (p.sellIn < 0) {
-          if (p.price >= 4) {
-            p.price -= 4;
-          } else {
-            p.price = 0;
-          }
-        }else{
-          if (p.price >= 2) {
-            p.price -= 2;
-          } else {
-            p.price = 0;
-          }
+          p.price -= 4;
+        } else {
+          p.price -= 2;
         }
+      break;
       default:
         if (p.sellIn < 0) {
-          if (p.price >= 2) {
-            p.price -= 2;
-          }
-          else {
-            p.price = 0;
-          }
+          p.price -= 2;
         } else {
-          if(p.price > 0){
-            p.price -= 1;
-          }
+          p.price -= 1;
         }
     }
 
-    if(p.name !== 'Mega Coverage'){
-      p = flatPrice(p);
-    }
+    p = this.flattenPrice(p);
 
     return p;
   }
 
   updatePrice(){
     for (var i = 0; i < this.products.length; i++) {
-      this.product[i] = updateProduct(this.products[i]);
+      this.products[i] = this.updateProduct(this.products[i]);
     }
+
+    return this.products;
   }
 
 }
